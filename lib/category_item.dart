@@ -1,32 +1,47 @@
 //general look of a category item
 import 'package:flutter/material.dart';
+import './category_meals_screen.dart';
 
 class CategoryItem extends StatelessWidget {
+  final String id;
   final String title;
   final Color color;
 
-  CategoryItem(this.title, this.color);
+  CategoryItem(this.id, this.title, this.color);
+
+  void selectCategory(BuildContext ctx) {
+    Navigator.of(ctx).push(
+      MaterialPageRoute(
+        builder: (_) {
+          return CategoryMealsScreen(id, title);
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(15),
-      // ignore: deprecated_member_use
-      child: Text(
-        title,
+    return InkWell(
+      onTap: () => selectCategory(context),
+      child: Container(
+        padding: const EdgeInsets.all(15),
         // ignore: deprecated_member_use
-        style: Theme.of(context).textTheme.title,
-      ),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            color.withOpacity(0.7),
-            color,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+        child: Text(
+          title,
+          // ignore: deprecated_member_use
+          style: Theme.of(context).textTheme.title,
         ),
-        borderRadius: BorderRadius.circular(15),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              color.withOpacity(0.7),
+              color,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(15),
+        ),
       ),
     );
   }
