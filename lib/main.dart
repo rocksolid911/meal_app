@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/category_screen.dart';
 import 'screens/category_meals_screen.dart';
 import 'screens/meal_details_screen.dart';
+import 'screens/tabs_screen.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -30,8 +31,12 @@ class MyApp extends StatelessWidget {
               fontFamily: 'Robotocondensed',
             ),
           )),
-      home: CategoriesScreen(),
+      // home: CategoriesScreen(),
       routes: {
+        '/': (ctx) => TabsScreen(),
+        //'/' represent the home page of application so if we use tab
+        //then tabscreen must be that home page and remember
+        //to remove scafold from those page as it brings its own to the page
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
         MealDetails.routeName: (ctx) => MealDetails(),
       },
