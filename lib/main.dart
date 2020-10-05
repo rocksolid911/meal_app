@@ -3,6 +3,7 @@ import 'screens/category_screen.dart';
 import 'screens/category_meals_screen.dart';
 import 'screens/meal_details_screen.dart';
 import 'screens/tabs_screen.dart';
+import 'screens/filters_Screen.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         //to remove scafold from those page as it brings its own to the page
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
         MealDetails.routeName: (ctx) => MealDetails(),
+        FilterScreen.routeName:(ctx) => FilterScreen(),
       },
     );
   }

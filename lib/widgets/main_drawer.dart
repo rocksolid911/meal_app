@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../screens/filters_Screen.dart';
+import '../screens/tabs_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   Widget buildListTile(String title, IconData icon,Function tapHandler) {
@@ -15,9 +17,7 @@ class MainDrawer extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onTap: () {
-        // ...
-      },
+      onTap: tapHandler,
     );
   }
 
@@ -54,8 +54,8 @@ class MainDrawer extends StatelessWidget {
             'Filters',
             Icons.settings,
               (){
-
-              }
+                Navigator.of(context).pushNamed('/filters');
+             }
           ),
         ],
       ),
