@@ -9,6 +9,7 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function removeItem;
 
   MealItem({
     this.id,
@@ -17,10 +18,11 @@ class MealItem extends StatelessWidget {
     this.complexity,
     this.imageUrl,
     this.duration,
+    this.removeItem,
   });
 
-  String get complexityText{
-    switch(complexity){
+  String get complexityText {
+    switch (complexity) {
       case Complexity.Simple:
         return 'simple';
         break;
@@ -34,8 +36,9 @@ class MealItem extends StatelessWidget {
         return 'unknown';
     }
   }
-  String get affordabilityText{
-    switch(affordability){
+
+  String get affordabilityText {
+    switch (affordability) {
       case Affordability.Affordable:
         return 'Affordable';
         break;
@@ -49,9 +52,15 @@ class MealItem extends StatelessWidget {
         return 'unknown';
     }
   }
+
   void selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(MealDetails.routeName, arguments: id);
+    Navigator.of(context).pushNamed(MealDetails.routeName, arguments: id).then((result){
+      if(result!= null){
+        removeItem(result);
+      }
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -119,18 +128,27 @@ class MealItem extends StatelessWidget {
                   ),
                   Row(
                     children: <Widget>[
-                      Icon(Icons.work,),
-                      SizedBox(width: 3,),
+                      Icon(
+                        Icons.work,
+                      ),
+                      SizedBox(
+                        width: 3,
+                      ),
                       Text(complexityText)
                     ],
                   ),
-                      Row(
-                        children: <Widget>[
-                          Icon(Icons.payment,),
-                           SizedBox(width: 6,),
-                            Text(affordabilityText)
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.payment,
+                      ),
+                      SizedBox(
+                        width: 6,
+                      ),
+                      Text(affordabilityText)
                     ],
-                      ),],
+                  ),
+                ],
               ),
             ),
           ],
