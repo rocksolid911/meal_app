@@ -45,6 +45,25 @@ class _MyAppState extends State<MyApp> {
       }).toList();
     });
   }
+  void _toggleFavorite(String mealId) {
+    final existingIndex =
+    _favoriteMeals.indexWhere((meal) => meal.id == mealId);
+    if (existingIndex >= 0) {
+      setState(() {
+        _favoriteMeals.removeAt(existingIndex);
+      });
+    } else {
+      setState(() {
+        _favoriteMeals.add(
+          DUMMY_MEALS.firstWhere((meal) => meal.id == mealId),
+        );
+      });
+    }
+  }
+
+  bool _isMealFavorite(String id) {
+    return _favoriteMeals.any((meal) => meal.id == id);
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -72,12 +91,12 @@ class _MyAppState extends State<MyApp> {
           )),
       // home: CategoriesScreen(),
       routes: {
-        '/': (ctx) => TabsScreen(),
+        '/': (ctx) => TabsScreen(_favoriteMeals),
         //'/' represent the home page of application so if we use tab
         //then tabscreen must be that home page and remember
         //to remove scafold from those page as it brings its own to the page
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(_availableMeals),
-        MealDetails.routeName: (ctx) => MealDetails(),
+        MealDetails.routeName: (ctx) => MealDetails(_toggleFavorite, _isMealFavorite),
         FilterScreen.routeName:(ctx) => FilterScreen(_filters, _setFilters),
       },
     );

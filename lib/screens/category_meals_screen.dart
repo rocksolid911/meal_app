@@ -59,7 +59,7 @@ void initState(){
          duration: displayedMeals[index].duration,
          affordability: displayedMeals[index].affordability,
          complexity: displayedMeals[index].complexity,
-         removeItem: _removeMeal,
+
        );
     }, itemCount : displayedMeals.length,)
     );
